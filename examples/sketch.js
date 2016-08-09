@@ -1,3 +1,10 @@
+/*
+ *@ibnibraahim You need to install pkg-config. 
+
+brew install pkg-config cairo libpng jpeg giflib
+ 
+*/
+
 var gif;
 var gif2;
 var giphy;
@@ -12,7 +19,8 @@ function setupGif() {
   });
 
   outGif.on('finished', function(blob) {
-    window.open(URL.createObjectURL(blob));
+    var win = window.open(URL.createObjectURL(blob), "_blank");
+    win.document.title = 'Rendered GIF'
     setupGif();
   });
 }
@@ -171,5 +179,6 @@ function mousePressed() {
   stop = !stop;
   if (record) {
     outGif.render();
+    record = !record
   }  
 }
