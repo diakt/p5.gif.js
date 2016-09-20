@@ -1,0 +1,24 @@
+{
+  "name": "p5.gif.js",
+  "version": "1.0.0",
+  "description": "JavaScript add-on for p5.js",
+  "main": "p5.gif.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diakt/p5.gif.js.git"
+  },
+  "author": "lavigne@saaaam.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diakt/p5.gif.js/issues"
+  },
+  "homepage": "https://github.com/diakt/p5.gif.js#readme"
+}
