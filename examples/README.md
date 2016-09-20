@@ -1,3 +1,4 @@
+```json
 {
   "name": "gif-mixer",
   "private": true,
@@ -34,3 +35,5 @@
     "extends": "./node_modules/react-scripts/config/eslint.js"
   }
 }
+
+```

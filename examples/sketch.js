@@ -71,7 +71,7 @@ function preload() {
 
     // console.log(giphy)
     gif = loadGif('test.gif');
-    gif2 = loadGif('test.gif');
+    gif2 = loadGif('test2.gif');
     // jpg = loadImage('code.jpg');
 }
 
@@ -127,6 +127,7 @@ var len;
 var loaded = false;
 
 function draw() {
+    var iter = frameCount % 100;
     if (gif.loaded() && gif2.loaded() && !loaded) {
         c = createCanvas(gif.width, gif.height);
         dom.width = gif.width;
@@ -147,15 +148,15 @@ function draw() {
         gif.filter(filters[getRandomInt(0,3)])
 
         image(gif);
-
-        if (frameCount % 24) {
-            tint(255, getRandomInt(0, 55));
-            image(gif2);
+        // tint(255, getRandomInt(0, 55));    
+        // if (iter < 50) {
+            // tint(255, getRandomInt(0, 55));
+            // image(gif);
             if (record) {
                 outGif.addFrame(c.elt, { delay: 1, copy: true });
             }
             blend(gif2, 0, 0, width, height, 0, 0, width, height, blends[getRandomInt(0, blends.length - 1)]);
-        }
+        // }
 
     }
 }

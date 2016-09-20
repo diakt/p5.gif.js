@@ -9,7 +9,7 @@ console.log(__dirname)
 app.use(express.static(path.join(__dirname, '.')));
 app.use(express.static(path.join(__dirname, '../node_modules')));
 app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname, '.'));
+  res.sendFile(path.join(__dirname, './build'));
 });
 
 app.post('/upload', function(req, res){
