@@ -2,7 +2,7 @@
   "name": "p5.gif.js",
   "version": "1.0.0",
   "description": "JavaScript add-on for p5.js",
-  "main": "p5.gif.js",
+  "main": "index.js",
   "directories": {
     "example": "examples"
   },
