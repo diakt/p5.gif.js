@@ -1,30 +1,42 @@
 {
-  "name": "p5.gif.js",
-  "version": "1.0.0",
-  "description": "p5.gif.js is a library that let's you play animated gifs in [p5.js](http://p5js.org) sketches. You load a gif by calling `loadGif('something.gif')` and then can display it using p5's built in `image()` function. Like this:",
-  "main": "p5.gif.js",
-  "directories": {
-    "example": "examples"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "gif-mixer",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Mix GIF images using parameters, download then and mix it again",
+  "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/diakt/p5.gif.js.git"
+    "url": "https://github.com/diakt/p5gif"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/diakt/p5.gif.js/issues"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && node build.js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server": "node server.js"
   },
-  "homepage": "https://github.com/diakt/p5.gif.js#readme",
+  "author": "Dima Ryzhov",
+  "license": "MIT",
   "dependencies": {
     "blob-util": "^1.2.1",
+    "bootstrap": "^3.3.7",
+    "express": "^4.13.3",
+    "foreman": "^2.0.0",
+    "formidable": "^1.0.17",
+    "gif.js": "git://github.com/diakt/gif.js.git",
     "gifshot": "^0.3.2",
-    "glitch-canvas": "^1.0.2",
-    "jquery": "^3.1.0",
-    "lodash": "^4.14.2",
-    "p5": "^0.5.3"
+    "lodash": "^4.16.1",
+    "p5": "^0.5.3",
+    "p5.gif.js": "git://github.com/diakt/p5.gif.js.git#commonjs",
+    "react": "^15.3.1",
+    "react-bootstrap": "^0.30.3",
+    "react-dom": "^15.3.1",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "react-scripts": "0.4.1"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/react-scripts/config/eslint.js"
   }
 }

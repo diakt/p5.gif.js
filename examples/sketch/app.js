@@ -6,10 +6,19 @@ var fs = require('fs');
 
 console.log(__dirname)
 
+app.use(function(req, res, next) {
+  // FIXME -- hack cors for different ports requesting
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Credentials', true)
+  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  next();
+});
+
 app.use(express.static(path.join(__dirname, '.')));
-app.use(express.static(path.join(__dirname, '../node_modules')));
-app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname, './build'));
+app.use(express.static(path.join(__dirname, './node_modules')));
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, './'));
 });
 
 app.post('/upload', function(req, res){
@@ -44,6 +53,6 @@ app.post('/upload', function(req, res){
 
 });
 
-var server = app.listen(3000, function(){
-  console.log('Server listening on port 3000');
+var server = app.listen(3001, function(){
+  console.log('Server listening on port 3001');
 });

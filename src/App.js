@@ -3,15 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import p5 from 'p5'
 import sketch from './sketch'
-import GIF from 'gif.js'
-import p5gif from 'p5.gif.js'
+import mixer from './gif-mixer'
 
 class App extends Component {
   componentDidMount() {
-    console.log(GIF)
-    console.log(p5gif)
-    console.log(p5)
-    new p5(sketch, this.refs.sketch);
+    new p5(mixer, this.refs.mixer);
   }
 
   render() {
@@ -21,6 +17,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to Hell</h2>
         </div>
+        <div ref="mixer" />
         <div id="sketch" ref="sketch" />
       </div>
     );
