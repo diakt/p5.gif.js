@@ -37,8 +37,8 @@ const sketch = (p) => {
   var loaded = false; 
 
   p.preload = function() {
-    gif = loadGif(p, 'http://localhost:3001/test.gif');
-    gif2 = loadGif(p, 'http://localhost:3001/test2.gif');
+    gif = loadGif(p, '/static/test.gif');
+    gif2 = loadGif(p, '/static/test2.gif');
   }
 
   p.setup = function () {
@@ -53,19 +53,19 @@ const sketch = (p) => {
         c = p.createCanvas(gif.width, gif.height);
         dom.width = gif.width;
         dom.height = gif.height;
-        console.log(c)
+        // console.log(c)
         len = gif.frames().length;
         order = _.range(len);
         order = _.chain(order).map((item, i) => i).shuffle().value();
         frameDelay = gif.frames()[0].delay;
-        console.log(order)
+        // console.log(order)
         loaded = true;
     }
 
     if (loaded && !stop) {
         frame = p.int(p.frameCount / frameDelay) % len;
         gif.frame(order[frame]);
-        console.log(`count: ${frame}; len: ${len}; frame: ${order[frame]}`);
+        // console.log(`count: ${frame}; len: ${len}; frame: ${order[frame]}`);
         gif.filter(filters[getRandomInt(0,3)])
 
         p.image(gif);
