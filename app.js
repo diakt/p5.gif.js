@@ -21,6 +21,7 @@ if (config.isDev()) {
 
   // CORS for ports proxy with Webpack Dev Server
   app.use((req, res, next) => {
+    console.log(req.url)
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Credentials', true)
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
@@ -29,6 +30,7 @@ if (config.isDev()) {
   });
 }
 
+app.use(express.static(path.join(__dirname, '.')));
 app.use(express.static(path.join(__dirname, './static')));
 app.use(express.static(path.join(__dirname, './build')));
 
