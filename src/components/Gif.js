@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import p5 from 'p5'
 import mixer from '../modules/gif-mixer'
 

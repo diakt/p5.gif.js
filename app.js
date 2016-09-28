@@ -1,16 +1,19 @@
-var path = require('path');
-var fs = require('fs');
+const path = require('path');
+const fs = require('fs');
 
-var express = require('express');
-var logger = require('morgan');
-var routes = require('./api/routes.js');
-var category = require('./api/category.js');
+const express = require('express');
+const logger = require('morgan');
 
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var config = require('./api/config');
+const routes = require('./api/routes');
+const category = require('./api/category');
+const tags = require('./api/tags');
+const dict = require('./api/dict');
 
-var app = express();
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const config = require('./api/config');
+
+const app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -21,7 +24,6 @@ if (config.isDev()) {
 
   // CORS for ports proxy with Webpack Dev Server
   app.use((req, res, next) => {
-    console.log(req.url)
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Credentials', true)
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
@@ -30,16 +32,18 @@ if (config.isDev()) {
   });
 }
 
-app.use(express.static(path.join(__dirname, '.')));
 app.use(express.static(path.join(__dirname, './static')));
 app.use(express.static(path.join(__dirname, './build')));
 
+app.use('/api/tags', tags);
+app.use('/api/dict', dict);
 app.use('/api/category', category);
+
 app.use('/', routes);
 
 /// catch 404 and forwarding to error handler
 app.use((req, res, next) => {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });

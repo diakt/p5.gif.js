@@ -1,3 +1,3 @@
 
-export const INCREASE = 'INCREASE'
-export const DECREASE = 'DECREASE'
+export const REQUEST_TAGS = 'REQUEST_TAGS';
+export const RECEIVE_TAGS = 'RECEIVE_TAGS';

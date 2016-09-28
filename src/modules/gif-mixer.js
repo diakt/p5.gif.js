@@ -37,8 +37,8 @@ const sketch = (p) => {
   var loaded = false; 
 
   p.preload = function() {
-    gif = loadGif(p, '/static/test.gif');
-    gif2 = loadGif(p, '/static/test2.gif');
+    gif = loadGif(p, '/test2.gif');
+    gif2 = loadGif(p, '/test.gif');
   }
 
   p.setup = function () {
@@ -66,17 +66,17 @@ const sketch = (p) => {
         frame = p.int(p.frameCount / frameDelay) % len;
         gif.frame(order[frame]);
         // console.log(`count: ${frame}; len: ${len}; frame: ${order[frame]}`);
-        gif.filter(filters[getRandomInt(0,3)])
-
+        // gif.filter(filters[getRandomInt(0,3)])
+        p.tint(255, getRandomInt(0, 55));    
         p.image(gif);
-        // tint(255, getRandomInt(0, 55));    
+        
         // if (iter < 50) {
             // tint(255, getRandomInt(0, 55));
             // image(gif);
             // if (record) {
             //     outGif.addFrame(c.elt, { delay: 1, copy: true });
             // }
-            p.blend(gif2, 0, 0, p.width, p.height, 0, 0, p.width, p.height, blends[getRandomInt(0, blends.length - 1)]);
+        p.blend(gif2, 0, 0, p.width, p.height, 0, 0, p.width, p.height, blends[getRandomInt(0, blends.length - 1)]);
         // }
 
     }
