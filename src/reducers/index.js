@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
+import { routerReducer as routing } from 'react-router-redux'
 
 import {
     REQUEST_TAGS, RECEIVE_TAGS
@@ -32,7 +32,7 @@ const tags = (state = {
 
 const rootReducer = combineReducers({
     tags,
-    routing: routerReducer
+    routing
 });
 
 export default rootReducer

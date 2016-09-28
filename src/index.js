@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom'
 import {createDevTools} from 'redux-devtools'
 import LogMonitor from 'redux-devtools-log-monitor'
 import DockMonitor from 'redux-devtools-dock-monitor'
-import {createStore, combineReducers, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
@@ -23,8 +23,10 @@ const DevTools = createDevTools(
 
 const store = createStore(
     reducer,
-    applyMiddleware(thunk),
-    DevTools.instrument()
+    compose(
+        applyMiddleware(thunk),
+        DevTools.instrument()
+    )
 )
 
 const history = syncHistoryWithStore(browserHistory, store)

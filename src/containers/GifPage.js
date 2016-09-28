@@ -9,7 +9,7 @@ const loadData = props => {
 
 class GifPage extends Component {
     static propTypes = {
-        tags: PropTypes.array.isRequired,
+        tags: PropTypes.object.isRequired,
         loadTags: PropTypes.func.isRequired
     }
 
