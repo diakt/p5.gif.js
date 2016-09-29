@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 const Tags = ({props}) => {
+    console.log(props)
     return (
         <ul>
             {props.tags.map((tas, i) =>
@@ -8,11 +9,11 @@ const Tags = ({props}) => {
             )}
         </ul>
     )
-}
+};
 
 
 Tags.propTypes = {
     tags: PropTypes.array.isRequired
-}
+};
 
 export default Tags

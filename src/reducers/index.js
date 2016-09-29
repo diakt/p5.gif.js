@@ -10,18 +10,20 @@ const tags = (state = {
     didInvalidate: false,
     tags: []
 }, action) => {
-    switch (action.type) {
+    const {type, payload} = action;
+
+    switch (type) {
         case REQUEST_TAGS:
             return {
                 ...state,
-                ...action.payload,
+                ...payload,
                 isFetching: true,
                 didInvalidate: false
             }
         case RECEIVE_TAGS:
             return {
                 ...state,
-                ...action.payload,
+                ...payload,
                 isFetching: false,
                 didInvalidate: false,
             }

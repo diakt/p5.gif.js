@@ -2,9 +2,13 @@ import 'whatwg-fetch'
 import cuid from 'cuid'
 import {REQUEST_TAGS, RECEIVE_TAGS} from '../constants'
 
-export const requestTags = () => ({
-    type: REQUEST_TAGS
-})
+export const requestTags = ({
+    id = cuid(),
+    timeStamp = Date.now()
+}) => ({
+    type: REQUEST_TAGS,
+    payload: {id, timeStamp}
+});
 
 export const receiveTags = ({
     id = cuid(),
@@ -13,13 +17,14 @@ export const receiveTags = ({
 }) => ({
     type: RECEIVE_TAGS,
     payload: {id, timeStamp, tags: json}
-})
+});
 
 export const loadTags = () => dispatch => {
-    dispatch(requestTags());
+    dispatch(requestTags({}));
+
     return fetch('/api/tags')
         .then(response => response.json())
-        .then(response => {
-            dispatch(receiveTags(response))
+        .then(json => {
+            dispatch(receiveTags({json}))
         });
-}
+};

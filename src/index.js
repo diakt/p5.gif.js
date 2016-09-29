@@ -19,7 +19,7 @@ const DevTools = createDevTools(
     <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
         <LogMonitor theme="tomorrow" preserveScrollTop={false}/>
     </DockMonitor>
-)
+);
 
 const store = createStore(
     reducer,
@@ -27,7 +27,7 @@ const store = createStore(
         applyMiddleware(thunk),
         DevTools.instrument()
     )
-)
+);
 
 const history = syncHistoryWithStore(browserHistory, store)
 
@@ -44,4 +44,4 @@ ReactDOM.render(
         </div>
     </Provider>,
     document.getElementById('root')
-)
+);
