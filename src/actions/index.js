@@ -13,10 +13,10 @@ export const requestTags = ({
 export const receiveTags = ({
     id = cuid(),
     timeStamp = Date.now(),
-    json = {}
+    data = {}
 }) => ({
     type: RECEIVE_TAGS,
-    payload: {id, timeStamp, tags: json}
+    payload: {id, timeStamp, tags: data}
 });
 
 export const loadTags = () => dispatch => {
@@ -24,7 +24,7 @@ export const loadTags = () => dispatch => {
 
     return fetch('/api/tags')
         .then(response => response.json())
-        .then(json => {
-            dispatch(receiveTags({json}))
+        .then(data => {
+            dispatch(receiveTags({data}))
         });
 };

@@ -9,7 +9,7 @@ const loadData = props => {
 
 class GifPage extends Component {
     static propTypes = {
-        tags: PropTypes.object.isRequired,
+        tags: PropTypes.array.isRequired,
         loadTags: PropTypes.func.isRequired
     }
 
@@ -18,10 +18,9 @@ class GifPage extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className="GifPage">
-                {/*<Tags tags={this.props.tags} />*/}
+                <Tags tags={this.props.tags} />
             </div>
         )
     }
@@ -30,7 +29,7 @@ class GifPage extends Component {
 const mapStateToProps = state => {
     const { tags } = state;
     return {
-        tags
+        tags: tags.tags
     }
 };
 

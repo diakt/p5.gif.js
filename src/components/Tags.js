@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react'
 
-const Tags = ({props}) => {
-    console.log(props)
+const Tags = ({tags}) => {
+
+    // FIXME - remove closure
     return (
         <ul>
-            {props.tags.map((tas, i) =>
+            {tags.map((tag, i) =>
                 <li key={i}>{tag}</li>
             )}
         </ul>
     )
 };
-
 
 Tags.propTypes = {
     tags: PropTypes.array.isRequired
