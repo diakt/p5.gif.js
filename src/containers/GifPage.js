@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { loadTags, selectTag, loadGifs } from '../actions'
-import { Tags } from '../components'
+import { Tags, Gifs } from '../components'
 
 const loadData = props => {
     props.loadTags();
@@ -16,6 +16,7 @@ class GifPage extends Component {
         return (
             <div className="GifPage">
                 <Tags {...this.props} />
+                <Gifs {...this.props} />
             </div>
         )
     }
@@ -29,9 +30,11 @@ GifPage.propTypes = {
 };
 
 const mapStateToProps = state => {
-    const { tagList, tag} = state;
+    const { tagList, tag, gifList} = state;
+
     return {
         tagList: tagList.items || [],
+        gifList: gifList.items || [],
         selectedTag: tag.name
     }
 };

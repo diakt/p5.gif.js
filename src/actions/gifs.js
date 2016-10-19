@@ -14,18 +14,19 @@ export const requestGifs = ({
 export const receiveGifs = ({
     id = cuid(),
     timeStamp = Date.now(),
+    category = '',
     items = []
 }) => ({
     type: RECEIVE_GIFS,
-    payload: {id, timeStamp, items}
+    payload: {id, timeStamp, category, items}
 });
 
 export const loadGifs = category => dispatch => {
     dispatch(requestGifs({category}));
 
-    return fetch(`/api/category/${category}`)
+    return fetch(`/api/category/${category.replace(/\s/g, '+')}`)
         .then(response => response.json())
         .then(data => {
-            dispatch(receiveGifs({items: data}))
+            dispatch(receiveGifs({items: data.data, category}))
         });
 };
