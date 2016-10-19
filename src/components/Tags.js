@@ -1,19 +1,37 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
+import { Button } from 'react-bootstrap'
+import './Tags.css'
 
-const Tags = ({tags}) => {
+class Tags extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
 
-    // FIXME - remove closure
-    return (
-        <ul>
-            {tags.map((tag, i) =>
-                <li key={i}>{tag}</li>
-            )}
-        </ul>
-    )
+	handleClick(tagName) {
+		this.props.selectTag({name: tagName})
+	}
+
+	render () {
+		const {tagList, selectedTag} = this.props;
+	    return (
+	        <ul className="TagList">
+	            {tagList.map((tagName, i) => {
+	            	const bsStyle = tagName === selectedTag ? 'danger' : 'default';
+	            	return (
+	            		<li className="Tag" key={i}>
+	            			<Button bsStyle={bsStyle} onClick={() => this.handleClick(tagName)}>{tagName}</Button>
+	            		</li>
+	            	);
+	            })}
+	        </ul>
+	    )
+	}
 };
 
 Tags.propTypes = {
-    tags: PropTypes.array.isRequired
+    tagList: PropTypes.array.isRequired,
+    selectedTag: PropTypes.string.isRequired
 };
 
-export default Tags
+export default Tags;

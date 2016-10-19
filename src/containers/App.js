@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react'
-import { Nav } from '../components'
+import { Navigation } from '../components'
 
 const App = ({ children }) => {
   return (
@@ -9,7 +9,7 @@ const App = ({ children }) => {
         <header>
           <h2>Layout</h2>
         </header>
-        <Nav />
+        <Navigation />
         <div className="Containers">{ children }</div>
         <footer>
             2016
