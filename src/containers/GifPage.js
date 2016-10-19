@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { loadTags, selectTag } from '../actions'
+import { loadTags, selectTag, loadGifs } from '../actions'
 import { Tags } from '../components'
 
 const loadData = props => {
@@ -24,20 +24,21 @@ class GifPage extends Component {
 GifPage.propTypes = {
     tagList: PropTypes.array.isRequired,
     loadTags: PropTypes.func.isRequired,
+    loadGifs: PropTypes.func.isRequired,
     selectTag: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
-    const { tagList, tag, selectTag } = state;
+    const { tagList, tag} = state;
     return {
         tagList: tagList.items || [],
-        selectedTag: tag.name,
-        selectTag
+        selectedTag: tag.name
     }
 };
 
 export default connect(mapStateToProps, {
     loadTags,
+    loadGifs,
     selectTag
 })(GifPage)
 

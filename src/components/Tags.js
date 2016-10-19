@@ -9,7 +9,8 @@ class Tags extends Component {
 	}
 
 	handleClick(tagName) {
-		this.props.selectTag({name: tagName})
+		this.props.selectTag({name: tagName});
+		this.props.loadGifs(tagName);
 	}
 
 	render () {
@@ -31,7 +32,9 @@ class Tags extends Component {
 
 Tags.propTypes = {
     tagList: PropTypes.array.isRequired,
-    selectedTag: PropTypes.string.isRequired
+    selectedTag: PropTypes.string.isRequired,
+    selectTag: PropTypes.func.isRequired,
+    loadGifs: PropTypes.func.isRequired
 };
 
 export default Tags;

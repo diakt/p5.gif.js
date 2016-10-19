@@ -3,29 +3,7 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 
-const tags = [
-    "3d",
-    "animation",
-    "architecture",
-    "art",
-    "black and white",
-    "cinemagraph",
-    "collage",
-    "design",
-    "geometry",
-    "glitch",
-    "illustration",
-    "loop",
-    "mash up",
-    "morph",
-    "photography",
-    "pixel",
-    "psychedelic",
-    "sculpture",
-    "timelapse",
-    "transparent",
-    "typography"
-];
+const tags = require('../dict/tags.json');
 
 const tagsJson = JSON.stringify(tags);
 

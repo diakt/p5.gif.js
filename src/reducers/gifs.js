@@ -2,10 +2,10 @@ import {
     REQUEST_GIFS, RECEIVE_GIFS
 } from '../constants'
 
-const gifs = (state = {
+export const gifList = (state = {
     isFetching: false,
     didInvalidate: false,
-    gifs: []
+    items: []
 }, action) => {
     const {type, payload} = action;
 
@@ -28,5 +28,3 @@ const gifs = (state = {
             return state
     }
 }
-
-export default gifs;
