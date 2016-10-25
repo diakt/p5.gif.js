@@ -1,5 +1,5 @@
 import {
-    REQUEST_GIFS, RECEIVE_GIFS
+    REQUEST_GIFS, RECEIVE_GIFS, SELECT_GIF
 } from '../constants'
 
 export const gifList = (state = {
@@ -24,7 +24,24 @@ export const gifList = (state = {
                 isFetching: false,
                 didInvalidate: false,
             }
+
         default:
             return state
+    }
+}
+
+export const gif = (state = {
+    gif: {}
+}, action) => {
+    const {type, payload} = action;
+
+    switch (type) {
+        case SELECT_GIF:
+            return {
+                ...state,
+                ...payload
+            }
+        default:
+            return state;    
     }
 }

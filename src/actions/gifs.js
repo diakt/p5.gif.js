@@ -1,6 +1,6 @@
 import 'whatwg-fetch'
 import cuid from 'cuid'
-import {REQUEST_GIFS, RECEIVE_GIFS} from '../constants'
+import {REQUEST_GIFS, RECEIVE_GIFS, SELECT_GIF} from '../constants'
 
 export const requestGifs = ({
     id = cuid(),
@@ -30,3 +30,12 @@ export const loadGifs = category => dispatch => {
             dispatch(receiveGifs({items: data.data, category}))
         });
 };
+
+export const selectGif = ({
+    id = cuid(),
+    timeStamp = Date.now(),
+    gif = {}
+}) => ({
+    type: SELECT_GIF,
+    payload: {id, timeStamp, data: gif}
+})
