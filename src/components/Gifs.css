@@ -1,0 +1,13 @@
+.img-crop {
+	overflow: hidden;
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.carousel-container {
+	width: 600px;
+	white-space: nowrap;
+	oveflow: hidden;
+}

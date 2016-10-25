@@ -18,10 +18,10 @@ class Tags extends Component {
 	    return (
 	        <ul className="TagList">
 	            {tagList.map((tagName, i) => {
-	            	const bsStyle = tagName === selectedTag ? 'danger' : 'default';
+	            	const bsStyle = tagName === selectedTag ? 'primary' : 'default';
 	            	return (
 	            		<li className="Tag" key={i}>
-	            			<Button bsStyle={bsStyle} onClick={() => this.handleClick(tagName)}>{tagName}</Button>
+	            			<Button bsSize="small" bsStyle={bsStyle} onClick={() => this.handleClick(tagName)}>{tagName}</Button>
 	            		</li>
 	            	);
 	            })}

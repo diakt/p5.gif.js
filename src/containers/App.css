@@ -1,3 +1,12 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  border: 0;
+}
+
 .App {
   text-align: center;
   min-height: 100%;
@@ -12,11 +21,25 @@
   text-align: left;
 }
 
-header {
+.header-container {
+  text-align: left;
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+}
+
+header,
+.nav-container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+header {
+  padding: 12px;
   color: white;
+}
+
+h2 {
+  margin: 0;
+  font-size: 16px;
 }
 
 footer {
