@@ -15,8 +15,11 @@ app.use(function(req, res, next) {
   next();
 });
 
+console.log(__dirname)
+console.log(path.join(__dirname, '..', '..', 'node_modules'))
 app.use(express.static(path.join(__dirname, '.')));
-app.use(express.static(path.join(__dirname, './node_modules')));
+app.use(express.static(path.join(__dirname, '..', '..', 'node_modules')));
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, './'));
 });
