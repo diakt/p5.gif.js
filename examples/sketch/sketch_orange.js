@@ -166,7 +166,7 @@ function draw() {
         
         // console.log(`count: ${frame}; len: ${len}; frame: ${order[frame]}`);
         gif.frame(order[frame]);
-        gif.filter(filters[2], 2)
+        gif.filter('posterize', 2)
 
         image(gif);
         // tint(255, getRandomInt(0, 55));    
@@ -178,8 +178,8 @@ function draw() {
                 outGif.addFrame(c.elt, { delay: 1, copy: true });
             }
             // 3, 5, 7
-            gif2.filter(filters[g2filter], 2)
-            blend(gif2, 0, 0, width, height, 0, 0, width, height, blends[g2blend]);
+            gif2.filter('posterize', 2)
+            blend(gif2, 0, 0, width, height, 0, 0, width, height, 'multiply');
             tint(220, 136, 52, 16);
         // }
 

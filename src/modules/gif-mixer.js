@@ -46,39 +46,46 @@ const sketch = gifImages => (p) => {
   }
 
   p.draw = function () {
+
     var iter = p.frameCount % 100;
     if (gif.loaded() && gif2.loaded() && !loaded) {
         c = p.createCanvas(gif.width, gif.height);
-        dom.width = gif.width;
-        dom.height = gif.height;
-        // console.log(c)
+        gif2.width = dom.width = gif.width;
+        gif2.height = dom.height = gif.height;
+        console.log(c)
         len = gif.frames().length;
         order = _.range(len);
         order = _.chain(order).map((item, i) => i).shuffle().value();
         frameDelay = gif.frames()[0].delay;
-        // console.log(order)
+        console.log(order)
         loaded = true;
     }
 
     if (loaded && !stop) {
         frame = p.int(p.frameCount / frameDelay) % len;
-        gif.frame(order[frame]);
-        // console.log(`count: ${frame}; len: ${len}; frame: ${order[frame]}`);
-        // gif.filter(filters[getRandomInt(0,3)])
-        p.tint(255, getRandomInt(0, 55));    
-        p.image(gif);
         
+        // console.log(`count: ${frame}; len: ${len}; frame: ${order[frame]}`);
+        gif.frame(order[frame]);
+        gif.filter('posterize', 2)
+
+        p.image(gif);
+        // tint(255, getRandomInt(0, 55));    
+        p.tint(255, getRandomInt(100, 155));
         // if (iter < 50) {
-            // tint(255, getRandomInt(0, 55));
+            
             // image(gif);
-            // if (record) {
-            //     outGif.addFrame(c.elt, { delay: 1, copy: true });
-            // }
-        p.blend(gif2, 0, 0, p.width, p.height, 0, 0, p.width, p.height, blends[getRandomInt(0, blends.length - 1)]);
+            if (record) {
+                // outGif.addFrame(c.elt, { delay: 1, copy: true });
+            }
+            // 3, 5, 7
+            gif2.filter('posterize', 2)
+            p.blend(gif2, 0, 0, p.width, p.height, 0, 0, p.width, p.height, 'multiply');
+            // p.tint(220, 136, 52, 16);
+            p.tint(255, 36);
         // }
 
     }
-  }  
+  }
 }
 
 function getRandomInt(min, max) {
