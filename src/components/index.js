@@ -1,5 +1,5 @@
 export { default as Navigation } from './Navigation'
-export { default as Gif } from './Gif'
+export { default as Sketch } from './Sketch'
 export { default as Gifs } from './Gifs'
 export { default as Tags } from './Tags'
 export { default as Preview } from './Preview'

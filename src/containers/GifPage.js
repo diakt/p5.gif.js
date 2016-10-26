@@ -1,25 +1,43 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { loadTags, selectTag, loadGifs, selectGif } from '../actions'
-import { Tags, Gifs, Preview, Gif } from '../components'
+import { loadTags, selectTag, loadGifs, selectGif, play, record, render } from '../actions'
+import { Tags, Gifs, Preview, Sketch } from '../components'
 import { getUrls } from '../reducers/gifs'
-
-const loadData = props => {
-    props.loadTags();
-};
 
 class GifPage extends Component {
     componentWillMount() {
-        loadData(this.props)
+        this.props.loadTags()
     }
 
     render() {
+        const {
+            loadTags, selectTag, loadGifs, selectGif, play, record, render,
+            tagList,
+            selectedTag,
+            gifList,
+            gifUrls
+        } = this.props;
+
         return (
             <div className="GifPage">
-                <Tags {...this.props} />
-                <Gifs {...this.props} />
-                <Preview gifUrls={this.props.gifUrls} />
-                <Gif gifUrls={this.props.gifUrls} />
+
+                <Tags 
+                    tagList={tagList}
+                    loadTags={loadTags}
+                    loadGifs={loadGifs}
+                    selectedTag={selectedTag}
+                    selectTag={selectTag} />
+                
+                <Gifs gifList={gifList} selectGif={selectGif} />
+
+                <Preview gifUrls={gifUrls} />
+                
+                <Sketch 
+                    play={play}
+                    record={record}
+                    render={render}
+                    gifUrls={gifUrls} />
+
             </div>
         )
     }
@@ -27,10 +45,9 @@ class GifPage extends Component {
 
 GifPage.propTypes = {
     tagList: PropTypes.array.isRequired,
-    loadTags: PropTypes.func.isRequired,
-    loadGifs: PropTypes.func.isRequired,
-    selectTag: PropTypes.func.isRequired,
-    selectGif: PropTypes.func.isRequired,
+    gifList: PropTypes.array.isRequired,
+    selectedTag: PropTypes.string.isRequired,
+    gifUrls: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => {
@@ -43,10 +60,5 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {
-    loadTags,
-    loadGifs,
-    selectTag,
-    selectGif
-})(GifPage)
+export default connect(mapStateToProps, { loadTags, selectTag, loadGifs, selectGif, play, record, render })(GifPage)
 
