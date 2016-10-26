@@ -1,0 +1,14 @@
+.preview-container {
+	white-space: nowrap;
+	width: 600px;
+	overflow: hidden;
+}
+
+.preview-crop {
+	width: 50%;
+	display: inline-block;
+}
+
+.preview-crop img {
+	width: 100%;
+}

@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { loadTags, selectTag, loadGifs, selectGif } from '../actions'
-import { Tags, Gifs, Preview } from '../components'
+import { Tags, Gifs, Preview, Gif } from '../components'
+import { getUrls } from '../reducers/gifs'
 
 const loadData = props => {
     props.loadTags();
@@ -17,7 +18,8 @@ class GifPage extends Component {
             <div className="GifPage">
                 <Tags {...this.props} />
                 <Gifs {...this.props} />
-                <Preview gifUrl={this.props.gifUrl} />
+                <Preview gifUrls={this.props.gifUrls} />
+                <Gif gifUrls={this.props.gifUrls} />
             </div>
         )
     }
@@ -28,7 +30,7 @@ GifPage.propTypes = {
     loadTags: PropTypes.func.isRequired,
     loadGifs: PropTypes.func.isRequired,
     selectTag: PropTypes.func.isRequired,
-    selectGif: PropTypes.func.isRequired
+    selectGif: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -37,11 +39,9 @@ const mapStateToProps = state => {
         tagList: tagList.items || [],
         gifList: gifList.items || [],
         selectedTag: tag.name,
-        gifUrl: gif.data ? gif.data.images.downsized.url : ''
+        gifUrls: getUrls(state)
     }
 };
-
-
 
 export default connect(mapStateToProps, {
     loadTags,

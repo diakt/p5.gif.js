@@ -38,4 +38,4 @@ export const selectGif = ({
 }) => ({
     type: SELECT_GIF,
     payload: {id, timeStamp, data: gif}
-})
+});

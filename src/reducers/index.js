@@ -11,4 +11,8 @@ const rootReducer = combineReducers({
     routing
 });
 
+export const getUrls = state => {
+	return state.gif.data.map(item => item.images.downsized.url);
+}
+
 export default rootReducer

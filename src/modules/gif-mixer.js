@@ -2,7 +2,7 @@ import GIF from 'gif.js'
 import { loadGif } from 'p5.gif.js'
 import _ from 'lodash'
 
-const sketch = (p) => {
+const sketch = gifImages => (p) => {
   
   var gif;
   var gif2;
@@ -37,14 +37,12 @@ const sketch = (p) => {
   var loaded = false; 
 
   p.preload = function() {
-    gif = loadGif(p, '/test2.gif');
-    gif2 = loadGif(p, '/test.gif');
+    gif = loadGif(p, gifImages[0]);
+    gif2 = loadGif(p, gifImages[1]);
   }
 
   p.setup = function () {
-    // setupGif();
     dom = document.querySelector('canvas');
-    console.log(dom)
   }
 
   p.draw = function () {
