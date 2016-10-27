@@ -1,14 +1,15 @@
-import GIF from 'gif.js'
 import { loadGif } from 'p5.gif.js'
 import _ from 'lodash'
+import emit from './event'
 
-const sketch = gifImages => (p) => {
-  
+var outGif;
+
+const sketch = (root, gifImages) => p => {
   var gif;
   var gif2;
   var giphy;
 
-  var outGif;
+  
   var record = true;
 
   var c;
@@ -20,7 +21,7 @@ const sketch = gifImages => (p) => {
       'gray',
       'erode',
       'dilate'
-  ]
+  ];
 
   var blendDefault = 'BLEND | DARKEST | LIGHTEST | DIFFERENCE | MULTIPLY| EXCLUSION | SCREEN | REPLACE | OVERLAY | HARD_LIGHT | SOFT_LIGHT | DODGE | BURN | ADD | NORMAL';
   var blends = blendDefault.split(' | ').map(mode => mode.toLowerCase())
@@ -35,6 +36,22 @@ const sketch = gifImages => (p) => {
   var len;
 
   var loaded = false; 
+  
+  function setupGif() {
+      outGif = new GIF({
+          workers: 2,
+          quality: 40,
+          // width: dom.width,
+          // height: dom.height
+      });
+      console.log(outGif)
+      outGif.on('finished', function(blob) {
+        console.log(blob)
+        emit(root, `blob-finished`, {
+          blob  
+        })
+      });
+  }
 
   p.preload = function() {
     gif = loadGif(p, gifImages[0]);
@@ -42,7 +59,7 @@ const sketch = gifImages => (p) => {
   }
 
   p.setup = function () {
-    dom = document.querySelector('canvas');
+    dom = document.querySelector(`#${root.id} canvas`);
   }
 
   p.draw = function () {
@@ -59,6 +76,7 @@ const sketch = gifImages => (p) => {
         frameDelay = gif.frames()[0].delay;
         console.log(order)
         loaded = true;
+        setupGif();
     }
 
     if (loaded && !stop) {
@@ -75,7 +93,7 @@ const sketch = gifImages => (p) => {
             
             // image(gif);
             if (record) {
-                // outGif.addFrame(c.elt, { delay: 1, copy: true });
+                outGif.addFrame(c.elt, { delay: 1, copy: true });
             }
             // 3, 5, 7
             gif2.filter('posterize', 2)
@@ -90,6 +108,10 @@ const sketch = gifImages => (p) => {
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
+}
+
+export function renderBlob() {
+  outGif.render();
 }
 
 export default sketch;
