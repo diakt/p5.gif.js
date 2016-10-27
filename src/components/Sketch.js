@@ -5,6 +5,9 @@ import 'whatwg-fetch'
 import p5 from 'p5'
 import mixer, { renderBlob } from '../modules/gif-mixer'
 
+// FIXME
+import {deselectGif} from '../actions'
+
 const Sketch = React.createClass({
 
   componentDidMount() {
@@ -18,27 +21,30 @@ const Sketch = React.createClass({
 
   },
 
-  handleBlobFinished(blob) {
-    console.log(blob)
+  handleBlobFinished(e) {
+    console.log(e.detail)
+    const blob = e.detail;
     var formData = new FormData();
     var filename = `blob-${Date.now()}.gif`;
-    formData.append('gif-blob', blob.blob, filename);
+    formData.append('gif-blob', blob, filename);
     // debugger
-    fetch('/upload', {
+    fetch('/api/upload', {
       method: 'POST',
-      headers: {
-        'Content-Type': false,
-        'Process-Data': false
-      },
       body: formData
-    }).then(response => {
+    })
+    .then(response => response.json())
+    .then(response => {
+
+      console.log(response)
       debugger
       this.refs.mixer.innerHTML = ''
-      this.refs.result.src=`/blob-${Date.now()}.gif`;
+      this.refs.result.src=`/${response.fileName}`;
+      this.refs.resultUrl.href = `/${response.fileName}`;
     })
   },
 
   handlePlayClick() {
+    deselectGif({});
     new p5(mixer(this.refs.mixer, this.props.gifUrls), this.refs.mixer);
   },
 
@@ -61,7 +67,11 @@ const Sketch = React.createClass({
 
         <div className="Sketch">
           <div ref="mixer" id="mixer" />
-          <img ref="result" />
+          
+          <a ref="resultUrl" target="_blank">
+            <img ref="result" />
+          </a>
+
         </div>
       </div>
     );

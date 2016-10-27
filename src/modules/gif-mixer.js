@@ -1,8 +1,9 @@
 import { loadGif } from 'p5.gif.js'
 import _ from 'lodash'
-import emit from './event'
+import event from './event'
 
 var outGif;
+var record = true;
 
 const sketch = (root, gifImages) => p => {
   var gif;
@@ -10,7 +11,7 @@ const sketch = (root, gifImages) => p => {
   var giphy;
 
   
-  var record = true;
+  
 
   var c;
   var dom;
@@ -44,12 +45,9 @@ const sketch = (root, gifImages) => p => {
           // width: dom.width,
           // height: dom.height
       });
-      console.log(outGif)
+
       outGif.on('finished', function(blob) {
-        console.log(blob)
-        emit(root, `blob-finished`, {
-          blob  
-        })
+        event(root, `blob-finished`, blob)
       });
   }
 
@@ -112,6 +110,7 @@ function getRandomInt(min, max) {
 
 export function renderBlob() {
   outGif.render();
+  record = !record
 }
 
 export default sketch;

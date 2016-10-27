@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const express = require('express');
 const logger = require('morgan');
+const formidable = require('formidable');
 
 const routes = require('./api/routes');
 const category = require('./api/category');
@@ -16,9 +17,6 @@ const config = require('./api/config');
 const app = express();
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 if (config.isDev()) {
 
@@ -32,45 +30,54 @@ if (config.isDev()) {
   });
 }
 
-app.use(express.static(path.join(__dirname, './static')));
-app.use(express.static(path.join(__dirname, './build')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api/tags', tags);
 app.use('/api/dict', dict);
 app.use('/api/category', category);
 
-app.use('/', routes);
-
-app.post('/upload', function(req, res){
+app.post('/api/upload', (req, res) => {
 
   // create an incoming form object
-  var form = new formidable.IncomingForm();
+  const form = new formidable.IncomingForm();
 
   // specify that we want to allow the user to upload multiple files in a single request
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  form.uploadDir = path.join(__dirname, '/static');
+  form.uploadDir = path.join(__dirname, 'static');
+
+  console.log(form.uploadDir)
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
-  form.on('file', function(field, file) {
+  let fileName = '';
+  form.on('file', (field, file) => {
+    console.log(file.path + ' is coming..')
+    fileName = file.name;
     fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
   // log any errors that occur
-  form.on('error', function(err) {
+  form.on('error', (err) => {
     console.log('An error has occured: \n' + err);
   });
 
   // once all the files have been uploaded, send a response to the client
-  form.on('end', function() {
-    res.end('success');
+  form.on('end', () => {
+    res.end(JSON.stringify({fileName}));
   });
 
   // parse the incoming request containing the form data
   form.parse(req);
 });
+
+
+app.use('/', routes);
 
 
 /// catch 404 and forwarding to error handler

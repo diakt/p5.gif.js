@@ -1,5 +1,5 @@
 import {
-    REQUEST_GIFS, RECEIVE_GIFS, SELECT_GIF
+    REQUEST_GIFS, RECEIVE_GIFS, SELECT_GIF, DESELECT_GIF
 } from '../constants'
 
 
@@ -52,6 +52,13 @@ export const gif = (state = {
                 ...state,
                 items
             }
+
+        case DESELECT_GIF:
+            return {
+                ...state,
+                items: playload
+            }
+            
         default:
             return state;    
     }

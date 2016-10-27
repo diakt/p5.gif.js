@@ -7,3 +7,4 @@ dist
 **/uploads
 build
 **/build
+static/blob-*
