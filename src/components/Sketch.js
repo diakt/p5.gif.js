@@ -27,7 +27,7 @@ const Sketch = React.createClass({
     var formData = new FormData();
     var filename = `blob-${Date.now()}.gif`;
     formData.append('gif-blob', blob, filename);
-    // debugger
+    
     fetch('/api/upload', {
       method: 'POST',
       body: formData
@@ -36,7 +36,7 @@ const Sketch = React.createClass({
     .then(response => {
 
       console.log(response)
-      debugger
+      // debugger
       this.refs.mixer.innerHTML = ''
       this.refs.result.src=`/${response.fileName}`;
       this.refs.resultUrl.href = `/${response.fileName}`;
@@ -44,11 +44,13 @@ const Sketch = React.createClass({
   },
 
   handlePlayClick() {
-    deselectGif({});
+    this.props.play();
+    this.props.deselectGif();
     new p5(mixer(this.refs.mixer, this.props.gifUrls), this.refs.mixer);
   },
 
   handleRenderClick() {
+    this.props.render();
     renderBlob();
   },
 
@@ -82,7 +84,8 @@ Sketch.propTypes = {
     gifUrls: PropTypes.array.isRequired,
     play: PropTypes.func.isRequired,
     record: PropTypes.func.isRequired,
-    render: PropTypes.func.isRequired
+    render: PropTypes.func.isRequired,
+    deselectGif: PropTypes.func.isRequired
 };
 
 export default Sketch;

@@ -2,27 +2,18 @@ import 'whatwg-fetch'
 import cuid from 'cuid'
 import {REQUEST_GIFS, RECEIVE_GIFS, SELECT_GIF, DESELECT_GIF} from '../constants'
 
-export const requestGifs = ({
-    id = cuid(),
-    timeStamp = Date.now(),
-    category = ''
-}) => ({
+export const requestGifs = (category, id = cuid(), timeStamp = Date.now()) => ({
     type: REQUEST_GIFS,
     payload: {id, timeStamp, category}
 });
 
-export const receiveGifs = ({
-    id = cuid(),
-    timeStamp = Date.now(),
-    category = '',
-    items = []
-}) => ({
+export const receiveGifs = (payload, id = cuid(), timeStamp = Date.now()) => ({
     type: RECEIVE_GIFS,
-    payload: {id, timeStamp, category, items}
+    payload: {id, timeStamp, ...payload}
 });
 
 export const loadGifs = category => dispatch => {
-    dispatch(requestGifs({category}));
+    dispatch(requestGifs(category));
 
     return fetch(`/api/category/${category.replace(/\s/g, '+')}`)
         .then(response => response.json())
@@ -31,21 +22,12 @@ export const loadGifs = category => dispatch => {
         });
 };
 
-export const selectGif = ({
-    id = cuid(),
-    timeStamp = Date.now(),
-    gif = {}
-}) => ({
+export const selectGif = (gif = {}, id = cuid(), timeStamp = Date.now()) => ({
     type: SELECT_GIF,
     payload: {id, timeStamp, data: gif}
 });
 
-
-export const deselectGif = ({
-    id = cuid(),
-    timeStamp = Date.now(),
-    gif = {}
-}) => ({
+export const deselectGif = (gif = {}, id = cuid(), timeStamp = Date.now()) => ({
     type: SELECT_GIF,
     payload: {id, timeStamp, data: gif}
 });

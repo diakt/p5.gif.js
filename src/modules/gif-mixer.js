@@ -88,16 +88,16 @@ const sketch = (root, gifImages) => p => {
         // tint(255, getRandomInt(0, 55));    
         p.tint(255, getRandomInt(100, 155));
         // if (iter < 50) {
-            
-            // image(gif);
-            if (record) {
-                outGif.addFrame(c.elt, { delay: 1, copy: true });
-            }
             // 3, 5, 7
             gif2.filter('posterize', 2)
             p.blend(gif2, 0, 0, p.width, p.height, 0, 0, p.width, p.height, 'multiply');
             // p.tint(220, 136, 52, 16);
             p.tint(255, 36);
+
+            // image(gif);
+            if (record) {
+                outGif.addFrame(c.elt, { delay: 1, copy: true });
+            } 
         // }
 
     }

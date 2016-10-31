@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { loadTags, selectTag, loadGifs, selectGif, play, record, render } from '../actions'
+import { loadTags, selectTag, loadGifs, selectGif, deselectGif, play, record, render } from '../actions'
 import { Tags, Gifs, Preview, Sketch } from '../components'
 import { getUrls } from '../reducers/gifs'
 
@@ -36,6 +36,7 @@ class GifPage extends Component {
                     play={play}
                     record={record}
                     render={render}
+                    deselectGif={deselectGif}
                     gifUrls={gifUrls} />
 
             </div>
@@ -60,5 +61,7 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, { loadTags, selectTag, loadGifs, selectGif, play, record, render })(GifPage)
+export default connect(mapStateToProps, 
+    { loadTags, selectTag, loadGifs, selectGif, deselectGif, play, record, render }
+)(GifPage)
 

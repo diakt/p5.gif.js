@@ -20,7 +20,7 @@ const Gifs = React.createClass({
 	},
 
 	handleClick(gif) {
-		this.props.selectGif({gif});
+		this.props.selectGif(gif);
 	},
 
 	render () {

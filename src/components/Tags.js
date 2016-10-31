@@ -9,7 +9,7 @@ class Tags extends Component {
 	}
 
 	handleClick(tagName) {
-		this.props.selectTag({name: tagName});
+		this.props.selectTag(tagName);
 		this.props.loadGifs(tagName);
 	}
 
