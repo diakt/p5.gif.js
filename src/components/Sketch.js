@@ -38,8 +38,8 @@ const Sketch = React.createClass({
       console.log(response)
       // debugger
       this.refs.mixer.innerHTML = ''
-      this.refs.result.src=`/${response.fileName}`;
-      this.refs.resultUrl.href = `/${response.fileName}`;
+      this.refs.result.src=`http://localhost:9000/${response.fileName}`;
+      this.refs.resultUrl.href = `http://localhost:9000/${response.fileName}`;
     })
   },
 
